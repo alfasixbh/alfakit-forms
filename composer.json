@@ -1,0 +1,87 @@
+{
+  "name": "alfasix/alfakit-forms",
+  "description": "A Typeform-class form builder for AlfaKit: admins build multi-step forms with conditional logic in the panel, the public fills them on your own pages, and every answer is re-validated on the server.",
+  "keywords": [
+    "laravel",
+    "alfakit",
+    "forms",
+    "form-builder",
+    "surveys",
+    "submissions"
+  ],
+  "homepage": "https://alfakit.dev/docs/plugins/forms",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alfa Six",
+      "homepage": "https://alfasixbh.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/alfasixbh/alfakit/issues",
+    "source": "https://github.com/alfasixbh/alfakit"
+  },
+  "require": {
+    "php": "^8.3",
+    "alfasix/alfakit": "^0.1|@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "AlfaSix\\AlfakitForms\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "AlfaSix\\AlfakitForms\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "AlfaSix\\AlfakitForms\\AlfakitFormsServiceProvider"
+      ]
+    },
+    "alfakit": {
+      "version": "^0.1",
+      "frontend": null,
+      "showcase": {
+        "demoPath": "forms",
+        "tour": [
+          "Open Marketing > Forms",
+          "Build a multi-step form with conditional logic",
+          "Preview the public form",
+          "Review submissions and stats"
+        ],
+        "clips": [
+          "react-light",
+          "react-dark",
+          "vue-light",
+          "vue-dark",
+          "svelte-light",
+          "svelte-dark"
+        ],
+        "worksWith": [
+          "helpdesk",
+          "analytics",
+          "cms"
+        ],
+        "highlights": [
+          "Visual builder with sections and page breaks",
+          "Conditional logic",
+          "Public route and embeds in any page",
+          "Server-side re-validation",
+          "Spam protection and captcha",
+          "Submissions with CSV and XLSX export",
+          "Email notifications"
+        ]
+      }
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
