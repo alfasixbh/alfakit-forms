@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Formulier',
-        'plural_label' => 'Formulieren',
+        'label' => 'formulier',
+        'plural_label' => 'formulieren',
         'navigation_label' => 'Formulieren',
         'copy_of' => 'Kopie van :title',
         'tabs' => [
@@ -216,8 +216,8 @@ return [
     ],
     'submissions' => [
         'title' => 'Inzendingen',
-        'label' => 'Inzending',
-        'plural_label' => 'Inzendingen',
+        'label' => 'inzending',
+        'plural_label' => 'inzendingen',
         'spam' => 'Spam',
         'answers' => 'Antwoorden',
         'details' => 'Details',

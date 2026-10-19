@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Formulário',
-        'plural_label' => 'Formulários',
+        'label' => 'formulário',
+        'plural_label' => 'formulários',
         'navigation_label' => 'Formulários',
         'copy_of' => 'Cópia de :title',
         'tabs' => [
@@ -216,8 +216,8 @@ return [
     ],
     'submissions' => [
         'title' => 'Envios',
-        'label' => 'Envio',
-        'plural_label' => 'Envios',
+        'label' => 'envio',
+        'plural_label' => 'envios',
         'spam' => 'Spam',
         'answers' => 'Respostas',
         'details' => 'Detalhes',

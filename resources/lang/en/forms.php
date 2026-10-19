@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Form',
-        'plural_label' => 'Forms',
+        'label' => 'form',
+        'plural_label' => 'forms',
         'navigation_label' => 'Forms',
         'copy_of' => 'Copy of :title',
         'tabs' => [
@@ -225,8 +225,8 @@ return [
 
     'submissions' => [
         'title' => 'Submissions',
-        'label' => 'Submission',
-        'plural_label' => 'Submissions',
+        'label' => 'submission',
+        'plural_label' => 'submissions',
         'spam' => 'Spam',
         'answers' => 'Answers',
         'details' => 'Details',

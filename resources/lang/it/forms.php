@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Modulo',
-        'plural_label' => 'Moduli',
+        'label' => 'modulo',
+        'plural_label' => 'moduli',
         'navigation_label' => 'Moduli',
         'copy_of' => 'Copia di :title',
         'tabs' => [
@@ -216,8 +216,8 @@ return [
     ],
     'submissions' => [
         'title' => 'Invii',
-        'label' => 'Invio',
-        'plural_label' => 'Invii',
+        'label' => 'invio',
+        'plural_label' => 'invii',
         'spam' => 'Spam',
         'answers' => 'Risposte',
         'details' => 'Dettagli',

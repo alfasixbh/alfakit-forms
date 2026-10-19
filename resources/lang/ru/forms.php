@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Форма',
-        'plural_label' => 'Формы',
+        'label' => 'форма',
+        'plural_label' => 'формы',
         'navigation_label' => 'Формы',
         'copy_of' => 'Копия :title',
         'tabs' => [
@@ -216,8 +216,8 @@ return [
     ],
     'submissions' => [
         'title' => 'Ответы',
-        'label' => 'Ответ',
-        'plural_label' => 'Ответы',
+        'label' => 'ответ',
+        'plural_label' => 'ответы',
         'spam' => 'Спам',
         'answers' => 'Ответы',
         'details' => 'Подробности',

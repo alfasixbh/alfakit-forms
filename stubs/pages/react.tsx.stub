@@ -1,5 +1,6 @@
 import { AlfakitComponent, type StandaloneComponentSchema } from '@alfakit/react'
 import { Head } from '@inertiajs/react'
+import type { ReactNode } from 'react'
 
 interface FormPageProps {
     form: StandaloneComponentSchema
@@ -28,3 +29,10 @@ export default function AlfakitFormPage({ form, meta }: FormPageProps) {
         </>
     )
 }
+
+/**
+ * A public page: render it without the app's default Inertia layout (a starter kit's
+ * AppLayout and its sidebar). To use the default layout instead, delete this line; to
+ * use another layout, wrap the page: `(page: ReactNode) => <PublicLayout>{page}</PublicLayout>`.
+ */
+AlfakitFormPage.layout = (page: ReactNode) => <>{page}</>

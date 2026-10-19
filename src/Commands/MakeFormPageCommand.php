@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace AlfaSix\AlfakitForms\Commands;
 
+use AlfaSix\Alfakit\Commands\Support\FrontendFormatter;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
@@ -46,6 +47,8 @@ class MakeFormPageCommand extends Command
 
         $files->ensureDirectoryExists(dirname($path));
         $files->put($path, (string) $files->get(dirname(__DIR__, 2)."/stubs/pages/{$adapter}.{$this->extensions[$adapter]}.stub"));
+        // In the app's own style when it has a formatter (`vp fmt`, Oxfmt or Prettier).
+        FrontendFormatter::format([$path]);
 
         $this->components->info("Created [{$path}]. Published forms are now served at /".trim((string) config('alfakit-forms.route.prefix', 'forms'), '/').'/{slug}.');
 

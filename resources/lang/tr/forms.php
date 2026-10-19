@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'resource' => [
-        'label' => 'Form',
-        'plural_label' => 'Formlar',
+        'label' => 'form',
+        'plural_label' => 'formlar',
         'navigation_label' => 'Formlar',
         'copy_of' => ':title kopyası',
         'tabs' => [
@@ -216,8 +216,8 @@ return [
     ],
     'submissions' => [
         'title' => 'Gönderimler',
-        'label' => 'Gönderim',
-        'plural_label' => 'Gönderimler',
+        'label' => 'gönderim',
+        'plural_label' => 'gönderimler',
         'spam' => 'Spam',
         'answers' => 'Cevaplar',
         'details' => 'Ayrıntılar',
