@@ -66,7 +66,8 @@ it('hides the honeypot from people and assistive technology', function (): void 
     $honeypot = collect(flatten(publicForm(contactForm()->slug)['content']))->firstWhere('statePath', '_website');
 
     expect($honeypot['extraFieldWrapperAttributes']['aria-hidden'])->toBe('true')
-        ->and($honeypot['extraFieldWrapperAttributes']['style'])->toContain('inset-inline-start:-10000px')
+        // Clipped where it stands: an offset towards the start widened right-to-left pages.
+        ->and($honeypot['extraFieldWrapperAttributes']['style'])->toContain('clip-path:inset(50%)')->not->toContain('-10000px')
         ->and($honeypot['extraInputAttributes']['tabindex'])->toBe('-1')
         ->and($honeypot['autocomplete'])->toBe('off');
 
