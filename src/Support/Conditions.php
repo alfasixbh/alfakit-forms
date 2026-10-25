@@ -28,6 +28,18 @@ final class Conditions
     /** Operators that compare with a value (the others look at the answer alone). */
     public const VALUE_OPERATORS = ['equals', 'not_equals', 'contains', 'not_contains', 'greater_than', 'less_than'];
 
+    /** The operator a new rule starts with. */
+    public const DEFAULT_OPERATOR = 'equals';
+
+    /**
+     * Whether a rule with this operator needs a value. A rule that was just added has no
+     * operator in its state yet: it shows (and uses) the default, which needs one.
+     */
+    public static function needsValue(mixed $operator): bool
+    {
+        return in_array($operator ?? self::DEFAULT_OPERATOR, self::VALUE_OPERATORS, true);
+    }
+
     /**
      * @return array<string, string>
      */

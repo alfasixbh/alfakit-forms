@@ -281,13 +281,13 @@ final class BuilderBlocks
                             ->label(__('alfakit-forms::forms.builder.logic.operator'))
                             ->options(Conditions::operatorOptions())
                             ->in(Conditions::OPERATORS)
-                            ->default('equals')
+                            ->default(Conditions::DEFAULT_OPERATOR)
                             ->required()
                             ->live(),
                         TextInput::make('value')
                             ->label(__('alfakit-forms::forms.builder.logic.value'))
                             ->maxLength(255)
-                            ->visible(fn (Get $get): bool => in_array($get('operator'), Conditions::VALUE_OPERATORS, true)),
+                            ->visible(fn (Get $get): bool => Conditions::needsValue($get('operator'))),
                     ]),
             ]);
     }

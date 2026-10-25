@@ -150,3 +150,9 @@ it('normalises builder state: answer keys, options and rules', function (): void
         ->and($items[4]['data']['conditions'])->toBe([['field' => 'full_name', 'operator' => 'equals', 'value' => 'x']])
         ->and(array_column($items, 'type'))->not->toContain('unknown');
 });
+
+it('asks for a value on a new rule, whose operator is still the default', function (): void {
+    expect(Conditions::needsValue(null))->toBeTrue()
+        ->and(Conditions::needsValue('equals'))->toBeTrue()
+        ->and(Conditions::needsValue('filled'))->toBeFalse();
+});
