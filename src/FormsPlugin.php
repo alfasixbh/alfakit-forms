@@ -278,6 +278,6 @@ class FormsPlugin implements Plugin
 
     public function isAuthorized(): bool
     {
-        return (bool) $this->evaluate($this->authorizeUsing);
+        return $this->evaluateUserAuthorization($this->authorizeUsing);
     }
 }

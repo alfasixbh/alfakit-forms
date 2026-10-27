@@ -142,6 +142,24 @@ it('rejects guests in the panel', function (): void {
     inertiaGet('/forms-admin/forms/'.$form->getKey())->assertRedirect();
 });
 
+it('never calls a user-typed authorize() closure for a guest', function (): void {
+    // The documented `fn (User $user)` callback: global search on the guest login page asks
+    // the resource whether it can be searched, which used to call it with null (a 500).
+    $plugin = alfakit()->getPanel('forms-admin')->getPlugin(AlfaSix\AlfakitForms\FormsPlugin::ID)
+        ->authorize(fn (AlfaSix\AlfakitForms\Tests\Fixtures\Models\FormsUser $user): bool => $user->name === 'Ada Admin');
+
+    inertiaGet('/forms-admin/login')->assertOk();
+
+    alfakit()->setCurrentPanel(alfakit()->getPanel('forms-admin'));
+
+    expect($plugin->hasAuthorization())->toBeTrue()
+        ->and($plugin->isAuthorized())->toBeFalse();
+
+    actingAs(user());
+
+    expect($plugin->isAuthorized())->toBeTrue();
+});
+
 class ReadOnlyFormPolicy
 {
     public function viewAny(mixed $user): bool
