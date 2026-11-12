@@ -92,6 +92,21 @@ it('validates the builder: unique and safe answer keys, known formats and operat
     expect(Form::query()->count())->toBe(0);
 });
 
+it('refuses a number question whose maximum is below its minimum', function (): void {
+    alfakit()->testPage(CreateForm::class, panel: 'forms-admin')
+        ->fillForm([
+            'title' => 'Range',
+            'slug' => 'range',
+            'fields' => [
+                block('number', ['label' => 'Age', 'name' => 'age', 'min' => 50, 'max' => 10]),
+                block('number', ['label' => 'Guests', 'name' => 'guests', 'max' => 10]),
+            ],
+        ])
+        ->call('create')
+        ->assertHasFormErrors(['fields.0.data.max'])
+        ->assertHasNoFormErrors(['fields.1.data.max']);
+});
+
 it('rejects redirect URLs that are not http(s) and invalid notification addresses', function (): void {
     alfakit()->testPage(CreateForm::class, panel: 'forms-admin')
         ->fillForm([

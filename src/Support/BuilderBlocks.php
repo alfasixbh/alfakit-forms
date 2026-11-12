@@ -186,7 +186,9 @@ final class BuilderBlocks
             ],
             FieldType::Number => [
                 TextInput::make('min')->label(__('alfakit-forms::forms.builder.min'))->numeric(),
-                TextInput::make('max')->label(__('alfakit-forms::forms.builder.max'))->numeric(),
+                TextInput::make('max')->label(__('alfakit-forms::forms.builder.max'))->numeric()
+                    // A range no number fits would make the question unanswerable.
+                    ->gte('min', static fn (Get $get): bool => filled($get('min'))),
                 Toggle::make('integer')->label(__('alfakit-forms::forms.builder.integer')),
             ],
             FieldType::CheckboxList => [

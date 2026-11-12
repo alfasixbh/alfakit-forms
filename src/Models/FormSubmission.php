@@ -63,7 +63,8 @@ class FormSubmission extends Model
     protected function casts(): array
     {
         return [
-            'data' => 'array',
+            // Stored unescaped, so answers in Arabic or with accents can be searched.
+            'data' => 'json:unicode',
             'is_spam' => 'boolean',
         ];
     }

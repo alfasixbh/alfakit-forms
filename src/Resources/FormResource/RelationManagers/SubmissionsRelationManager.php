@@ -14,6 +14,7 @@ use AlfaSix\Alfakit\Infolists\Components\TextEntry;
 use AlfaSix\Alfakit\Resources\RelationManagers\RelationManager;
 use AlfaSix\Alfakit\Schemas\Components\Component;
 use AlfaSix\Alfakit\Schemas\Components\Section;
+use AlfaSix\Alfakit\Support\SearchQuery;
 use AlfaSix\Alfakit\Tables\Columns\TextColumn;
 use AlfaSix\Alfakit\Tables\Filters\TernaryFilter;
 use AlfaSix\Alfakit\Tables\Table;
@@ -112,7 +113,13 @@ class SubmissionsRelationManager extends RelationManager
             ])
             ->searchable()
             ->modifyQueryUsing(static fn (Builder $query): Builder => $query->with('form'))
-            ->searchUsing(static fn (Builder $query, string $search): Builder => $query->where('data', 'like', '%'.addcslashes($search, '%_\\').'%'))
+            // The answers are a JSON column: `SearchQuery` casts it to text on PostgreSQL,
+            // where `json like` is an error.
+            ->searchUsing(static function (Builder $query, string $search): Builder {
+                SearchQuery::contains($query, $query->qualifyColumn('data'), $search);
+
+                return $query;
+            })
             ->filters([
                 TernaryFilter::make('is_spam')
                     ->label(__('alfakit-forms::forms.submissions.fields.is_spam'))
