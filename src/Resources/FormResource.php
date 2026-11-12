@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 /**
  * Forms built in the panel. The edit page holds the visual builder and the settings;
@@ -181,7 +183,9 @@ class FormResource extends Resource
                         ->required()
                         ->alphaDash()
                         ->maxLength(120)
-                        ->unique(ignoreRecord: true),
+                        // Unique across every tenant: the public address is `/forms/{slug}`
+                        // (`unique()` would only look at the current tenant's forms).
+                        ->rule(static fn (?Model $record): Unique => Rule::unique((new Form)->getTable(), 'slug')->ignore($record)),
                     Toggle::make('is_published')
                         ->label(__('alfakit-forms::forms.resource.fields.is_published'))
                         ->helperText(__('alfakit-forms::forms.resource.fields.is_published_help')),

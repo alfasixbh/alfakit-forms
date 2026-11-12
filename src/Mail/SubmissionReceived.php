@@ -49,12 +49,25 @@ class SubmissionReceived extends Mailable implements ShouldQueue
         // Rendered through the mail Markdown (AlfaKit theme, layout and CSS inlining).
         $html = (MailTheme::enabled() ? MailTheme::renderer() : app(Markdown::class))->render(self::VIEW, [
             'formTitle' => (string) $this->submission->form?->title,
-            'answers' => $this->getAnswers(),
+            // The view is parsed as Markdown after Blade: what a visitor typed must not become
+            // links, images or headings in the mail the form's owners trust.
+            'answers' => array_map(static fn (array $answer): array => [
+                'label' => self::escapeMarkdown($answer['label']),
+                'value' => self::escapeMarkdown($answer['value']),
+            ], $this->getAnswers()),
             'submittedAt' => $this->submission->created_at,
             'poweredBy' => $poweredBy,
         ]);
 
         return $this->templateContent(new Content(htmlString: (string) $html), $poweredBy);
+    }
+
+    /**
+     * Backslash-escape the characters Markdown gives a meaning to.
+     */
+    public static function escapeMarkdown(string $text): string
+    {
+        return (string) preg_replace('/([\\\\`*_{}\[\]()#+\-.!|~=:])/', '\\\\$1', $text);
     }
 
     public function templateKey(): string

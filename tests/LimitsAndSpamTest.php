@@ -209,3 +209,22 @@ it('renders the notification email', function (): void {
     expect($mail->envelope()->subject)->toBe('New submission: Contact us')
         ->and($html)->toContain('Your name')->toContain('&lt;b&gt;Ann&lt;/b&gt;')->not->toContain('<b>Ann</b>');
 });
+
+it('shows Markdown a visitor typed as text in the notification email', function (): void {
+    $form = contactForm();
+    $submission = FormSubmission::query()->create(['form_id' => $form->getKey(), 'data' => [
+        'your_name' => '[Reset your password](https://evil.test/login) ![](https://evil.test/pixel.png)',
+        'topic' => 'Sales',
+        'message' => "# Urgent\n**ann_b** at ann@example.com (1. first)",
+    ]]);
+
+    $html = (new SubmissionReceived($submission))->render();
+
+    expect($html)
+        ->not->toContain('href="https://evil.test/login"')
+        ->not->toContain('<img')
+        ->not->toContain('<h1>Urgent')
+        ->toContain('[Reset your password](https://evil.test/login)')
+        ->toContain('ann_b')
+        ->toContain('ann@example.com');
+});
